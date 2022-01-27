@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { api } from "../../services/ApiLogin/ApiLogin";
+import { api } from "../../services/apiLogin/api";
 
 type User = {
     name: string;
