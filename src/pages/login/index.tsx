@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { api } from "../../services/apiLogin/api";
 
 type User = {
@@ -15,21 +15,25 @@ export function LoginPage() {
     const [userPassword, setUserPassword] = useState("")
 
     async function getUser() {
-        try {
-          const response = await api.get('/users');
-          console.log(response.data);
-        } catch (error) {
-          console.error(error);
-        }
-      }
+    }
 
-    async function handleLogin() {
+    async function handleLogin(event: FormEvent) {
+        event.preventDefault();
+
+        const user = {
+            email: userEmail,
+            password: userPassword
+        }
+
+        await api.post('/users/authenticate', user).then(response => {
+            console.log(response.data)
+        })
     }
 
     return (
         <div>
             <div className="inputs">
-                <form action="submmit" method="post">
+                <form>
                     <h2>E-mail:</h2>
                     <input type="email" 
                         onChange={event => setUserEmail(event.target.value)} 
@@ -42,14 +46,14 @@ export function LoginPage() {
                         onChange={event => setUserPassword(event.target.value)}
                         value={userPassword}
                     />
-
-                    
-                </form>
-                <button 
-                        onClick={getUser}
+                    <button 
+                        onClick={handleLogin}
                     >
                         Entrar
                     </button>
+                    
+                </form>
+
             </div>
 
             <div className="img">
