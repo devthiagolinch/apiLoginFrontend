@@ -55,20 +55,25 @@ export function LoginPage() {
 
     return (
         <div className="page-content">
+            <div className="login-box">
             <div className="inputs">
                 <form>
-                    <h2>E-mail:</h2>
-                    <input type="email" 
-                        onChange={event => setUserEmail(event.target.value)} 
-                        value={userEmail}
-                    />
+                    <div className="input-box">
+                        <p>E-mail:</p>
+                        <input type="email" 
+                            onChange={event => setUserEmail(event.target.value)} 
+                            value={userEmail}
+                        />
+                    </div>
 
-                    <h2>Senha</h2>
-                    <input 
-                        type="password"
-                        onChange={event => setUserPassword(event.target.value)}
-                        value={userPassword}
-                    />
+                    <div className="input-box">
+                        <p>Senha:</p>
+                        <input 
+                            type="password"
+                            onChange={event => setUserPassword(event.target.value)}
+                            value={userPassword}
+                        />
+                    </div>
                     <button 
                         onClick={handleLogin}
                     >
@@ -76,9 +81,12 @@ export function LoginPage() {
                     </button>
                     
                 </form>
+            </div>
 
-                <p>Ainda não tem conta? <Link to={"/signup"}>Crie agora!</Link></p>
-
+            <div className="infos">
+                <p>Ainda não tem conta?</p>
+                <Link className="link" to={"/signup"}>Crie agora!</Link>
+            </div>
             </div>
         </div>
     );
