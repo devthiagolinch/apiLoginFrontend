@@ -1,29 +1,38 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
+import { useNavigate } from "react-router"
 import { api } from "../../services/apiLogin/api"
 
 
 export function CreateUser() {
+    let navigate = useNavigate();
 
     const [userName, setUserName] = useState('')
     const [userAvatar, setUserAvatar] = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
 
-    async function handleCreateUser() {
+    async function handleCreateUser(event: FormEvent) {
+        event.preventDefault();
+
+        if(userPassword.trim() === '') {
+            throw new Error("Not Password")
+        }
         
         const user = {
             name: userName,
             email: userEmail,
-            avatarURL: userAvatar,
+            avatarUrl: userAvatar,
             password: userPassword
         }
 
-        await api.post('/users/', user);
+        await api.post('/users/', user)
+
+        navigate("/")
     }
 
     return(
         <div>
-            <form>
+            <form onSubmit={handleCreateUser}>
                 <h3>Complete name</h3>
                 <input type="text" placeholder="Name"
                     onChange={event => setUserName(event.target.value)} 
@@ -49,7 +58,7 @@ export function CreateUser() {
                 />
 
                 <button
-                    onClick={handleCreateUser}
+                    type="submit"
                 >
                     Create account
                 </button>

@@ -1,17 +1,39 @@
+import { useEffect, useState } from "react"
 import { api } from "../../services/apiLogin/api"
 
+type User = {
+    id: string,
+    name: string,
+    email: string,
+    avatarUrl: string,
+}
 
 export function Profile() {
+    const [user, setUser] = useState<User>();
 
-    async function handleProfile() {
-        const userProfile = await api.get('/users/profile/96fd248b-8b27-47ea-952b-583d0d835fdb').then(data => {return data.data})
+/*     useEffect(() => {
+        api.get('users/profile/d2994394-181e-452b-bc9b-69a9b112b825').then(({data}) => {
+            setUser(data)
+        })
 
-        console.log(userProfile)
-    }
+        api.get(`users/profile/`).then(({data}) => {
+            setUser(data)
+            console.log(data)
+        })
+
+    }, []) */
+    console.log(user)
 
     return (
         <div>
-            <button onClick={handleProfile}>Get Profile</button>
+
+            <div>
+                <div className="header">
+                    <h1>Hello {user?.name}</h1>
+                    <span>{user?.email}</span>
+                </div>
+                <img src={user?.avatarUrl} alt="" />
+            </div>
         </div>
     )
 }
