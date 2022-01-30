@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router";
+
+import './styles.scss'
 import { api } from "../../services/apiLogin/api"
+import { Link } from "react-router-dom";
 
 type User = {
     id: string,
@@ -9,10 +13,11 @@ type User = {
 }
 
 export function Profile() {
+    const {id} = useParams()
     const [user, setUser] = useState<User>();
 
-/*     useEffect(() => {
-        api.get('users/profile/d2994394-181e-452b-bc9b-69a9b112b825').then(({data}) => {
+    useEffect(() => {
+        api.get(`users/profile/${id}`).then(({data}) => {
             setUser(data)
         })
 
@@ -21,18 +26,19 @@ export function Profile() {
             console.log(data)
         })
 
-    }, []) */
-    console.log(user)
+    }, [])
 
     return (
-        <div>
-
-            <div>
-                <div className="header">
-                    <h1>Hello {user?.name}</h1>
-                    <span>{user?.email}</span>
+        <div id="page-content">
+            <div className="profile-box">
+                <div className="profile-infos">
+                    <p>{user?.name}</p>
+                    <p>{user?.email}</p>
+                    <Link to={"/"} className="return-button">Logout</Link>
                 </div>
-                <img src={user?.avatarUrl} alt="" />
+                <div className="profile-img">
+                    <img src={user?.avatarUrl} alt="" />
+                </div>
             </div>
         </div>
     )

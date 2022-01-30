@@ -20,12 +20,6 @@ export function LoginPage() {
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
 
-    /* useEffect(() => {
-        api.get("/users/").then(data => {
-            console.log(data)
-        })
-    }, []) */
-
     function createUserPath() {
         history("/signup")
     }
@@ -42,11 +36,6 @@ export function LoginPage() {
             if(!response) {
                 throw new Error("Not Allowd")
             }
-
-            api.get(`users/profile/${response.data}`).then(({data}) => {
-                setUser(data)
-                console.log(data)
-            })
 
             history(`profile/${response.data}`)
         })

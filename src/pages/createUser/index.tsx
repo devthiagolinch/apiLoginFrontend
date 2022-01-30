@@ -1,5 +1,7 @@
 import { FormEvent, useState } from "react"
 import { useNavigate } from "react-router"
+
+import './signupStyle.scss'
 import { api } from "../../services/apiLogin/api"
 
 
@@ -30,39 +32,52 @@ export function CreateUser() {
         navigate("/")
     }
 
-    return(
-        <div>
-            <form onSubmit={handleCreateUser}>
-                <h3>Complete name</h3>
-                <input type="text" placeholder="Name"
-                    onChange={event => setUserName(event.target.value)} 
-                    value={userName}
-                />
+    return (
+        <div className="page-content">
+            <div className="login-box">
+            <div className="inputs">
+                <form>
+                <div className="input-box">
+                        <p>Nome Completo:</p>
+                        <input type="email" 
+                            onChange={event => setUserName(event.target.value)} 
+                            value={userName}
+                        />
+                    </div>
 
-                <h3>Profile picture</h3>
-                <input type="text" placeholder="Avatar URL" 
-                    onChange={event => setUserAvatar(event.target.value)}
-                    value={userAvatar}
-                />
+                    <div className="input-box">
+                        <p>Avatar:</p>
+                        <input type="email" 
+                            onChange={event => setUserAvatar(event.target.value)} 
+                            value={userAvatar}
+                        />
+                    </div>
 
-                <h3>Better e-mail</h3>
-                <input type="email" name="userEmail" placeholder="E-mail" 
-                    onChange={event => setUserEmail(event.target.value)}
-                    value={userEmail}
-                />
+                    <div className="input-box">
+                        <p>E-mail:</p>
+                        <input type="email" 
+                            onChange={event => setUserEmail(event.target.value)} 
+                            value={userEmail}
+                        />
+                    </div>
 
-                <h3>Password</h3>
-                <input type="password" name="userPassword" placeholder="Password" 
-                    onChange={event => setUserPassword(event.target.value)}
-                    value={userPassword}
-                />
-
-                <button
-                    type="submit"
-                >
-                    Create account
-                </button>
-            </form>
+                    <div className="input-box">
+                        <p>Senha:</p>
+                        <input 
+                            type="password"
+                            onChange={event => setUserPassword(event.target.value)}
+                            value={userPassword}
+                        />
+                    </div>
+                    <button 
+                        onClick={handleCreateUser}
+                    >
+                        Cadastrar
+                    </button>
+                    
+                </form>
+            </div>
+            </div>
         </div>
-    )
+    );
 }
