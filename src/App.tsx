@@ -4,6 +4,8 @@ import {
   Routes
 } from "react-router-dom";
 
+import './styles/global.scss'
+
 import { CreateUser } from "./pages/createUser";
 import { LoginPage } from './pages/login/index';
 import { Profile } from "./pages/profile";

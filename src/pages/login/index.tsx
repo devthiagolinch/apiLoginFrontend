@@ -1,6 +1,9 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import './styles.scss'
 import { api } from "../../services/apiLogin/api";
+import { Link } from "react-router-dom";
 
 export type User = {
     name: string;
@@ -51,7 +54,7 @@ export function LoginPage() {
 
 
     return (
-        <div>
+        <div className="page-content">
             <div className="inputs">
                 <form>
                     <h2>E-mail:</h2>
@@ -74,11 +77,7 @@ export function LoginPage() {
                     
                 </form>
 
-                <button
-                    onClick={createUserPath}
-                >
-                    Create Account
-                </button>
+                <p>Ainda não tem conta? <Link to={"/signup"}>Crie agora!</Link></p>
 
             </div>
         </div>
