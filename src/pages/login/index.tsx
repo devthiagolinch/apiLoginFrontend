@@ -1,7 +1,8 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../services/apiLogin/api";
 
-type User = {
+export type User = {
     name: string;
     email: string;
     avatarUrl: string;
@@ -9,12 +10,21 @@ type User = {
 }
 
 export function LoginPage() {
-    
+    const [user, setUser] = useState<User>();
+
+    let history = useNavigate();
 
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
 
-    async function getUser() {
+    /* useEffect(() => {
+        api.get("/users/").then(data => {
+            console.log(data)
+        })
+    }, []) */
+
+    function createUserPath() {
+        history("/signup")
     }
 
     async function handleLogin(event: FormEvent) {
@@ -26,9 +36,19 @@ export function LoginPage() {
         }
 
         await api.post('/users/authenticate', user).then(response => {
-            console.log(response.data)
+            if(!response) {
+                throw new Error("Not Allowd")
+            }
+
+            api.get(`users/profile/${response.data}`).then(({data}) => {
+                setUser(data)
+                console.log(data)
+            })
+
+            history(`profile/${response.data}`)
         })
     }
+
 
     return (
         <div>
@@ -54,10 +74,12 @@ export function LoginPage() {
                     
                 </form>
 
-            </div>
+                <button
+                    onClick={createUserPath}
+                >
+                    Create Account
+                </button>
 
-            <div className="img">
-                <img src="" alt="" />
             </div>
         </div>
     );
