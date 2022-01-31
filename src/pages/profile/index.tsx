@@ -21,11 +21,6 @@ export function Profile() {
             setUser(data)
         })
 
-        api.get(`users/profile/`).then(({data}) => {
-            setUser(data)
-            console.log(data)
-        })
-
     }, [])
 
     return (
