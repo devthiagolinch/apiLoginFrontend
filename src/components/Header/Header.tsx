@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './styles.scss'
 
 type User = {
@@ -11,6 +12,7 @@ export function Header(user: User) {
         <div className="user-infos">
             <div className="user-name">
                 <p>{user?.name}</p>
+                <Link className='logoutBtn' to={"/"}>Logout</Link>
             </div>
 
             <div className="avatar">

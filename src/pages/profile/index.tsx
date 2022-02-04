@@ -41,7 +41,7 @@ export function Profile() {
         )
     } else {
         return (
-            <h1>Page Not Found</h1>
+            <h1>User Not Found</h1>
         )
     }
 }
