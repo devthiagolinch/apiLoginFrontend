@@ -1,3 +1,5 @@
+import './styles.scss'
+
 type User = {
     name: string;
     email: string;

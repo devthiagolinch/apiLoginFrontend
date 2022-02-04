@@ -26,13 +26,17 @@ export function Profile() {
 
     if(user) {
         return (
-            <div id="page-content">
+            <div id="page">
                 <Header 
                     key={user.id}
                     name={user.name}
                     email={user.email}
                     avatarUrl={user.avatarUrl}
                 />
+
+                <div id="page-content">
+                    <h1>Bem vindo de volta {user.name}</h1>
+                </div>
             </div>
         )
     } else {
